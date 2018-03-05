@@ -1,0 +1,8 @@
+# directories
+node_modules
+.serverless
+.webpack
+
+# individual files
+.DS_Store
+serverless.env.yml

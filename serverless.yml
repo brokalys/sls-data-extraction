@@ -1,0 +1,21 @@
+service: sls-data-extraction
+
+provider:
+  name: aws
+  region: eu-west-1
+  runtime: nodejs6.10
+  cfLogs: true
+  versionFunctions: false
+  environment: ${file(serverless.env.yml)}
+
+functions:
+  base-data:
+    handler: src/base-data.run
+    events:
+      - schedule: rate(1 day)
+
+plugins:
+  - serverless-webpack
+
+custom:
+  webpackIncludeModules: true
