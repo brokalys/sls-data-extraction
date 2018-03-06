@@ -9,10 +9,37 @@ provider:
   environment: ${file(serverless.env.yml)}
 
 functions:
-  base-data:
+  # Daily statistics for all properties: sell
+  base-data-sell:
     handler: src/base-data.run
+    environment:
+      PROPERTY_CATEGORY: sell
     events:
-      - schedule: rate(1 day)
+      - schedule: cron(0 0 * * *) # every day at 00:00
+
+  # Daily statistics for all properties: buy
+  base-data-buy:
+    handler: src/base-data.run
+    environment:
+      PROPERTY_CATEGORY: buy
+    events:
+      - schedule: cron(0 0 * * *) # every day at 00:00
+
+  # Daily statistics for all properties: rent
+  base-data-rent:
+    handler: src/base-data.run
+    environment:
+      PROPERTY_CATEGORY: rent
+    events:
+      - schedule: cron(0 0 * * *) # every day at 00:00
+
+  # Daily statistics for all properties: want-to-rent
+  base-data-want-to-rent:
+    handler: src/base-data.run
+    environment:
+      PROPERTY_CATEGORY: want_to_rent
+    events:
+      - schedule: cron(0 0 * * *) # every day at 00:00
 
 plugins:
   - serverless-webpack

@@ -6,6 +6,8 @@ const numbers = require('numbers');
 const octokit = require('@octokit/rest')();
 
 export const run = async (event, context, callback) => {
+  const category = process.env.PROPERTY_CATEGORY;
+
   const connection = await mysql.createConnection({
     host:           process.env.DB_HOST,
     user:           process.env.DB_USERNAME,
@@ -26,7 +28,7 @@ export const run = async (event, context, callback) => {
       AND type = ?
     `,
 
-    values: [start, end, 'sell'],
+    values: [start, end, category],
 
     typeCast(field, next) {
       if (field.type === 'NEWDECIMAL') {
@@ -52,12 +54,12 @@ export const run = async (event, context, callback) => {
 
   connection.end();
 
-  await uploadToGithub(stats);
+  // await uploadToGithub(category, stats);
 
   callback(null, stats);
 };
 
-const uploadToGithub = async (data) => {
+const uploadToGithub = async (category, data) => {
   await octokit.authenticate({
     type: 'token',
     token: process.env.GITHUB_TOKEN,
@@ -66,7 +68,7 @@ const uploadToGithub = async (data) => {
   const { data: currentFile } = await octokit.repos.getContent({
     owner: 'brokalys',
     repo: 'data',
-    path: 'data/daily-sell.csv',
+    path: `data/daily-${category}.csv`,
   });
 
   let content = new Buffer(currentFile.content, 'base64').toString();
