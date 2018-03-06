@@ -41,6 +41,12 @@ functions:
     events:
       - schedule: cron(0 0 * * *) # every day at 00:00
 
+  # Weekly market share analysis
+  market-share:
+    handler: src/market-share.run
+    events:
+      - schedule: rate(1 week)
+
 plugins:
   - serverless-webpack
 
