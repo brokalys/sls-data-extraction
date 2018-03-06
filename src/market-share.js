@@ -50,13 +50,12 @@ export const run = async (event, context, callback) => {
     'reklama.lv':   (((data.find(({ source }) => source === 'reklama.lv') || {}).count || 0) / total).toFixed(2),
     'elots.lv':     (((data.find(({ source }) => source === 'elots.lv') || {}).count || 0) / total).toFixed(2),
     'zip.lv':       (((data.find(({ source }) => source === 'zip.lv') || {}).count || 0) / total).toFixed(2),
-    'varianti.lv':  (((data.find(({ source }) => source === 'varianti.lv') || {}).count || 0) / total).toFixed(2),
     'santims.lv':   (((data.find(({ source }) => source === 'santims.lv') || {}).count || 0) / total).toFixed(2),
     'cityreal.lv':  (((data.find(({ source }) => source === 'cityreal.lv') || {}).count || 0) / total).toFixed(2),
     'takari.eu':    (((data.find(({ source }) => source === 'takari.eu') || {}).count || 0) / total).toFixed(2),
   };
 
-  stats.other = (1 - stats['ss.lv'] - stats['city24.lv'] - stats['dada.lv'] - stats['reklama.lv'] - stats['elots.lv'] - stats['zip.lv'] - stats['varianti.lv'] - stats['santims.lv'] - stats['cityreal.lv'] - stats['takari.eu']).toFixed(2);
+  stats.other = (1 - stats['ss.lv'] - stats['city24.lv'] - stats['dada.lv'] - stats['reklama.lv'] - stats['elots.lv'] - stats['zip.lv'] - stats['santims.lv'] - stats['cityreal.lv'] - stats['takari.eu']).toFixed(2);
 
   connection.end();
 
@@ -78,7 +77,7 @@ const uploadToGithub = async (data) => {
   });
 
   let content = new Buffer(currentFile.content, 'base64').toString();
-  content += `"${data.start.substr(0, 10)}","${data.end.substr(0, 10)}","${data['ss.lv']}","${data['city24.lv']}","${data['dada.lv']}","${data['reklama.lv']}","${data['elots.lv']}","${data['zip.lv']}","${data['varianti.lv']}","${data['santims.lv']}","${data['cityreal.lv']}","${data['takari.eu']}","${data.other}"\n`;
+  content += `"${data.start.substr(0, 10)}","${data.end.substr(0, 10)}","${data['ss.lv']}","${data['city24.lv']}","${data['dada.lv']}","${data['reklama.lv']}","${data['elots.lv']}","${data['zip.lv']}","${data['santims.lv']}","${data['cityreal.lv']}","${data['takari.eu']}","${data.other}"\n`;
 
   await octokit.repos.updateFile({
     owner: 'brokalys',
