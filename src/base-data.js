@@ -24,7 +24,7 @@ export const run = async (event, context, callback) => {
       SELECT price
       FROM properties
       WHERE created_at BETWEEN ? AND ?
-      AND price > 0
+      AND price >= 1
       AND type = ?
     `,
 
@@ -54,7 +54,7 @@ export const run = async (event, context, callback) => {
 
   connection.end();
 
-  // await uploadToGithub(category, stats);
+  await uploadToGithub(category, stats);
 
   callback(null, stats);
 };
@@ -68,7 +68,7 @@ const uploadToGithub = async (category, data) => {
   const { data: currentFile } = await octokit.repos.getContent({
     owner: 'brokalys',
     repo: 'data',
-    path: `data/daily-${category}.csv`,
+    path: `data/daily-${category.replace(/_/g, '-')}.csv`,
   });
 
   let content = new Buffer(currentFile.content, 'base64').toString();
@@ -81,5 +81,9 @@ const uploadToGithub = async (category, data) => {
     message: `Daily data: ${data.date}`,
     content: new Buffer(content).toString('base64'),
     sha: currentFile.sha,
+    author: {
+      name: 'Brokalys bot',
+      email: 'noreply@brokalys.com',
+    },
   });
 };
