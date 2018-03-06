@@ -14,8 +14,8 @@ export const run = async (event, context, callback) => {
     connectTimeout: 1000,
   });
 
-  const start = moment.utc().subtract(1, 'week').startOf('week').toISOString();
-  const end = moment.utc().subtract(1, 'week').endOf('week').toISOString();
+  const start = moment.utc().subtract(1, 'week').startOf('isoWeek').toISOString();
+  const end = moment.utc().subtract(1, 'week').endOf('isoWeek').toISOString();
 
   const [data, fields] = await connection.query({
     sql: `
@@ -84,7 +84,7 @@ const uploadToGithub = async (data) => {
     owner: 'brokalys',
     repo: 'data',
     path: currentFile.path,
-    message: `Daily data: ${data.date}`,
+    message: `Weekly data: ${data.start} - ${data.end}`,
     content: new Buffer(content).toString('base64'),
     sha: currentFile.sha,
     author: {
