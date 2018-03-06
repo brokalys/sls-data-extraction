@@ -3,6 +3,7 @@
 const mysql   = require('mysql2/promise');
 const moment  = require('moment');
 const numbers = require('numbers');
+const octokit = require('@octokit/rest')();
 
 export const run = async (event, context, callback) => {
   const connection = await mysql.createConnection({
@@ -13,8 +14,8 @@ export const run = async (event, context, callback) => {
     connectTimeout: 1000,
   });
 
-  const start = moment.utc().startOf('day').toISOString();
-  const end = moment.utc().endOf('day').toISOString();
+  const start = moment.utc().subtract(1, 'day').startOf('day').toISOString();
+  const end = moment.utc().subtract(1, 'day').endOf('day').toISOString();
 
   const [data, fields] = await connection.query({
     sql: `
@@ -38,11 +39,11 @@ export const run = async (event, context, callback) => {
 
   const prices = data.map(({ price }) => price);
 
-  const response = {
+  const stats = {
+    date:         start,
     count:        prices.length,
+    min:          parseInt(numbers.basic.min(prices), 10),
     max:          parseInt(numbers.basic.max(prices), 10),
-    min:          parseInt(numbers.basic.min(prices), 10),
-    min:          parseInt(numbers.basic.min(prices), 10),
     mean:         parseInt(numbers.statistic.mean(prices), 10),
     median:       parseInt(numbers.statistic.median(prices), 10),
     mode:         parseInt(numbers.statistic.mode(prices), 10),
@@ -50,5 +51,33 @@ export const run = async (event, context, callback) => {
   };
 
   connection.end();
-  callback(null, response);
+
+  await uploadToGithub(stats);
+
+  callback(null, stats);
+};
+
+const uploadToGithub = async (data) => {
+  await octokit.authenticate({
+    type: 'token',
+    token: process.env.GITHUB_TOKEN,
+  });
+
+  const { data: currentFile } = await octokit.repos.getContent({
+    owner: 'brokalys',
+    repo: 'data',
+    path: 'data/daily-sell.csv',
+  });
+
+  let content = new Buffer(currentFile.content, 'base64').toString();
+  content += `"${data.date.substr(0, 10)}","${data.count}","${data.min}","${data.max}","${data.mean}","${data.median}","${data.mode}","${data.standardDev}"\n`;
+
+  await octokit.repos.updateFile({
+    owner: 'brokalys',
+    repo: 'data',
+    path: currentFile.path,
+    message: `Daily data: ${data.date}`,
+    content: new Buffer(content).toString('base64'),
+    sha: currentFile.sha,
+  });
 };
