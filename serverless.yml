@@ -39,7 +39,7 @@ functions:
     environment:
       PROPERTY_CATEGORY: want_to_rent
     events:
-      - schedule: rate(1 day)
+      - schedule: cron(0 14 * * ? *)
 
   # Weekly market share analysis
   market-share:
