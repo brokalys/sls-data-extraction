@@ -2,16 +2,16 @@
 
 const db      = require('./lib/db');
 const moment  = require('moment');
-const numbers = require('numbers');
 const octokit = require('@octokit/rest')();
+const Buffer  = require('safe-buffer').Buffer;
 
 export const run = async (event, context, callback) => {
-  const connection = db.connect();
+  const connection = await db.connect();
 
   const start = moment.utc().subtract(1, 'week').startOf('isoWeek').toISOString();
   const end = moment.utc().subtract(1, 'week').endOf('isoWeek').toISOString();
 
-  const [data, fields] = await connection.query({
+  const [data] = await connection.query({
     sql: `
       SELECT source, COUNT(*) as count
       FROM properties
