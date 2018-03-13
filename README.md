@@ -1,6 +1,7 @@
 # Serverless Data Extraction Functions
 
 [![Build Status](https://travis-ci.org/brokalys/sls-data-extraction.svg?branch=master)](https://travis-ci.org/brokalys/sls-data-extraction)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f9308c037f89411788066519c98dc43e)](https://www.codacy.com/app/matiss/sls-data-extraction?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=brokalys/sls-data-extraction&amp;utm_campaign=Badge_Grade)
 
 Takes care of extracting scheduled statistical data from the Brokalys real estate database.
 
