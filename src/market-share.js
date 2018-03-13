@@ -1,18 +1,12 @@
 'use strict';
 
-const mysql   = require('mysql2/promise');
+const db      = require('./lib/db');
 const moment  = require('moment');
 const numbers = require('numbers');
 const octokit = require('@octokit/rest')();
 
 export const run = async (event, context, callback) => {
-  const connection = await mysql.createConnection({
-    host:           process.env.DB_HOST,
-    user:           process.env.DB_USERNAME,
-    password:       process.env.DB_PASSWORD,
-    database:       process.env.DB_DATABASE,
-    connectTimeout: 1000,
-  });
+  const connection = db.connect();
 
   const start = moment.utc().subtract(1, 'week').startOf('isoWeek').toISOString();
   const end = moment.utc().subtract(1, 'week').endOf('isoWeek').toISOString();
