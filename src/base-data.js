@@ -8,7 +8,7 @@ const Buffer  = require('safe-buffer').Buffer;
 
 export const run = async (event, context, callback) => {
   const category = process.env.PROPERTY_CATEGORY;
-
+  console.log(process.env.DB_HOST);
   const connection = await db.connect();
 
   const start = moment.utc().subtract(1, 'day').startOf('day').toISOString();
