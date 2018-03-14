@@ -20,7 +20,7 @@ functions:
     environment:
       PROPERTY_CATEGORY: sell
     events:
-      - schedule: rate(1 day)
+      - schedule: cron(15 0 * * ? *)
 
   # Daily statistics for all properties: buy
   base-data-buy:
@@ -28,7 +28,7 @@ functions:
     environment:
       PROPERTY_CATEGORY: buy
     events:
-      - schedule: rate(1 day)
+      - schedule: cron(10 0 * * ? *)
 
   # Daily statistics for all properties: rent
   base-data-rent:
@@ -36,7 +36,7 @@ functions:
     environment:
       PROPERTY_CATEGORY: rent
     events:
-      - schedule: rate(1 day)
+      - schedule: cron(5 0 * * ? *)
 
   # Daily statistics for all properties: want-to-rent
   base-data-want-to-rent:
@@ -44,7 +44,7 @@ functions:
     environment:
       PROPERTY_CATEGORY: want_to_rent
     events:
-      - schedule: cron(0 14 * * ? *)
+      - schedule: cron(0 0 * * ? *)
 
   # Weekly market share analysis
   market-share:

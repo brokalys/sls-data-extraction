@@ -73,7 +73,7 @@ const uploadToGithub = async (category, data) => {
     owner: 'brokalys',
     repo: 'data',
     path: currentFile.path,
-    message: `Daily data: ${data.date}`,
+    message: `Daily data: ${data.date.substr(0, 10)}`,
     content: new Buffer(content).toString('base64'),
     sha: currentFile.sha,
     author: {
