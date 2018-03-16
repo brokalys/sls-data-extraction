@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/brokalys/sls-data-extraction.svg?branch=master)](https://travis-ci.org/brokalys/sls-data-extraction)
 [![codebeat badge](https://codebeat.co/badges/d08012a9-e6bb-4b70-8113-37f4a31b6f6d)](https://codebeat.co/projects/github-com-brokalys-sls-data-extraction-master)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbrokalys%2Fsls-data-extraction.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbrokalys%2Fsls-data-extraction?ref=badge_shield)
 
 Takes care of extracting scheduled statistical data from the Brokalys real estate database.
 
@@ -37,3 +38,7 @@ sls deploy
 # In order to deploy individual functions
 sls deploy -f base-data-sell
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbrokalys%2Fsls-data-extraction.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbrokalys%2Fsls-data-extraction?ref=badge_large)
