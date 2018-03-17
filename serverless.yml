@@ -53,8 +53,13 @@ functions:
       - schedule: rate(7 days)
 
   # Regional data exports for Riga
-  regional-data:
+  regional-data-apartment-sell-monthly:
     handler: src/regional-data.run
+    timeout: 200
+    environment:
+      PROPERTY_CATEGORY: apartment
+      PROPERTY_TYPE: sell
+      DURATION: monthly
 
 plugins:
   - serverless-webpack
