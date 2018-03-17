@@ -14,7 +14,7 @@ export const appendToFile = async (filename, data, commitMessage = undefined) =>
   });
 
   let content = new Buffer(currentFile.content, 'base64').toString();
-  content += data;
+  content += data + "\n";
 
   await octokit.repos.updateFile({
     owner: 'brokalys',
