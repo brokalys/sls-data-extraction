@@ -25,7 +25,6 @@ export const run = async (event, context, callback) => {
 
   for (var i = 0; i < regions.length; i++) {
     const region = regions[i];
-    console.log('region', region.name);
 
     const [data] = await connection.query({
       sql: `

@@ -52,7 +52,7 @@ functions:
     events:
       - schedule: rate(7 days)
 
-  # Regional data exports for Riga
+  # Median monthly SELLING price for APARTMENTS in Riga
   regional-data-apartment-sell-monthly:
     handler: src/regional-data.run
     timeout: 200
@@ -60,6 +60,41 @@ functions:
       PROPERTY_CATEGORY: apartment
       PROPERTY_TYPE: sell
       DURATION: monthly
+    events:
+      - schedule: cron(30 0 1 * ? *)
+
+  # Median monthly RENT price for APARTMENTS in Riga
+  regional-data-apartment-rent-monthly:
+    handler: src/regional-data.run
+    timeout: 200
+    environment:
+      PROPERTY_CATEGORY: apartment
+      PROPERTY_TYPE: rent
+      DURATION: monthly
+    events:
+      - schedule: cron(35 0 1 * ? *)
+
+  # Median monthly SELLING price for HOUSES in Riga
+  regional-data-house-sell-monthly:
+    handler: src/regional-data.run
+    timeout: 200
+    environment:
+      PROPERTY_CATEGORY: house
+      PROPERTY_TYPE: sell
+      DURATION: monthly
+    events:
+      - schedule: cron(40 0 1 * ? *)
+
+  # Median monthly RENT price for HOUSES in Riga
+  regional-data-house-rent-monthly:
+    handler: src/regional-data.run
+    timeout: 200
+    environment:
+      PROPERTY_CATEGORY: house
+      PROPERTY_TYPE: rent
+      DURATION: monthly
+    events:
+      - schedule: cron(45 0 1 * ? *)
 
 plugins:
   - serverless-webpack
