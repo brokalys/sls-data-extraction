@@ -96,6 +96,28 @@ functions:
     events:
       - schedule: cron(45 0 1 * ? *)
 
+  # Median monthly SELLING price for LAND in Riga
+  regional-data-land-sell-monthly:
+    handler: src/regional-data.run
+    timeout: 200
+    environment:
+      PROPERTY_CATEGORY: land
+      PROPERTY_TYPE: sell
+      DURATION: monthly
+    events:
+      - schedule: cron(50 0 1 * ? *)
+
+  # Median monthly RENT price for LAND in Riga
+  regional-data-land-rent-monthly:
+    handler: src/regional-data.run
+    timeout: 200
+    environment:
+      PROPERTY_CATEGORY: land
+      PROPERTY_TYPE: rent
+      DURATION: monthly
+    events:
+      - schedule: cron(55 0 1 * ? *)
+
 plugins:
   - serverless-webpack
 
