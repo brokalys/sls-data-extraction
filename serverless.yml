@@ -125,7 +125,7 @@ functions:
       - schedule: cron(55 0 1 * ? *)
 
   # Median monthly SELLING price for APARTMENTS in Latvia
-  regional-data-apartment-sell-monthly-latvia:
+  regional-data-apartment-sell-monthly-lv:
     handler: src/avg-regional-data.run
     timeout: 300
     environment:
@@ -134,7 +134,7 @@ functions:
       PROPERTY_TYPE: sell
 
   # Median monthly RENT price for APARTMENTS in Latvia
-  regional-data-apartment-rent-monthly-latvia:
+  regional-data-apartment-rent-monthly-lv:
     handler: src/avg-regional-data.run
     timeout: 300
     environment:
@@ -143,7 +143,7 @@ functions:
       PROPERTY_TYPE: rent
 
   # Median monthly SELLING price for HOUSES in Latvia
-  regional-data-house-sell-monthly-latvia:
+  regional-data-house-sell-monthly-lv:
     handler: src/avg-regional-data.run
     timeout: 300
     environment:
@@ -152,7 +152,7 @@ functions:
       PROPERTY_TYPE: sell
 
   # Median monthly RENT price for HOUSES in Latvia
-  regional-data-house-rent-monthly-latvia:
+  regional-data-house-rent-monthly-lv:
     handler: src/avg-regional-data.run
     timeout: 300
     environment:
@@ -161,7 +161,7 @@ functions:
       PROPERTY_TYPE: rent
 
   # Median monthly SELLING price for LAND in Latvia
-  regional-data-land-sell-monthly-latvia:
+  regional-data-land-sell-monthly-lv:
     handler: src/avg-regional-data.run
     timeout: 300
     environment:
@@ -170,7 +170,7 @@ functions:
       PROPERTY_TYPE: sell
 
   # Median monthly RENT price for LAND in Latvia
-  regional-data-land-rent-monthly-latvia:
+  regional-data-land-rent-monthly-lv:
     handler: src/avg-regional-data.run
     timeout: 300
     environment:
