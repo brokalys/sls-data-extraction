@@ -13,8 +13,8 @@ export const run = async (event, context, callback) => {
   const type = process.env.PROPERTY_TYPE;
   const category = process.env.PROPERTY_CATEGORY;
 
-  const start = moment.utc().subtract(3, 'month').startOf('month').toISOString();
-  const end = moment.utc().subtract(3, 'month').endOf('month').toISOString();
+  const start = moment.utc().subtract(1, 'month').startOf('month').toISOString();
+  const end = moment.utc().subtract(1, 'month').endOf('month').toISOString();
 
   const regions = geojson[process.env.REGION].features.map((feature) => ({
     name: feature.properties.apkaime,
