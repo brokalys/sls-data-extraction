@@ -57,6 +57,7 @@ functions:
     handler: src/regional-data.run
     timeout: 200
     environment:
+      REGION: riga
       PROPERTY_CATEGORY: apartment
       PROPERTY_TYPE: sell
       DURATION: monthly
@@ -68,6 +69,7 @@ functions:
     handler: src/regional-data.run
     timeout: 200
     environment:
+      REGION: riga
       PROPERTY_CATEGORY: apartment
       PROPERTY_TYPE: rent
       DURATION: monthly
@@ -79,6 +81,7 @@ functions:
     handler: src/regional-data.run
     timeout: 200
     environment:
+      REGION: riga
       PROPERTY_CATEGORY: house
       PROPERTY_TYPE: sell
       DURATION: monthly
@@ -90,6 +93,7 @@ functions:
     handler: src/regional-data.run
     timeout: 200
     environment:
+      REGION: riga
       PROPERTY_CATEGORY: house
       PROPERTY_TYPE: rent
       DURATION: monthly
@@ -101,6 +105,7 @@ functions:
     handler: src/regional-data.run
     timeout: 200
     environment:
+      REGION: riga
       PROPERTY_CATEGORY: land
       PROPERTY_TYPE: sell
       DURATION: monthly
@@ -112,11 +117,66 @@ functions:
     handler: src/regional-data.run
     timeout: 200
     environment:
+      REGION: riga
       PROPERTY_CATEGORY: land
       PROPERTY_TYPE: rent
       DURATION: monthly
     events:
       - schedule: cron(55 0 1 * ? *)
+
+  # Median monthly SELLING price for APARTMENTS in Latvia
+  regional-data-apartment-sell-monthly-latvia:
+    handler: src/avg-regional-data.run
+    timeout: 840
+    environment:
+      REGION: latvia
+      PROPERTY_CATEGORY: apartment
+      PROPERTY_TYPE: sell
+
+  # Median monthly RENT price for APARTMENTS in Latvia
+  regional-data-apartment-rent-monthly-latvia:
+    handler: src/avg-regional-data.run
+    timeout: 840
+    environment:
+      REGION: latvia
+      PROPERTY_CATEGORY: apartment
+      PROPERTY_TYPE: rent
+
+  # Median monthly SELLING price for HOUSES in Latvia
+  regional-data-house-sell-monthly-latvia:
+    handler: src/avg-regional-data.run
+    timeout: 840
+    environment:
+      REGION: latvia
+      PROPERTY_CATEGORY: house
+      PROPERTY_TYPE: sell
+
+  # Median monthly RENT price for HOUSES in Latvia
+  regional-data-house-rent-monthly-latvia:
+    handler: src/avg-regional-data.run
+    timeout: 840
+    environment:
+      REGION: latvia
+      PROPERTY_CATEGORY: house
+      PROPERTY_TYPE: rent
+
+  # Median monthly SELLING price for LAND in Latvia
+  regional-data-land-sell-monthly-latvia:
+    handler: src/avg-regional-data.run
+    timeout: 840
+    environment:
+      REGION: latvia
+      PROPERTY_CATEGORY: land
+      PROPERTY_TYPE: sell
+
+  # Median monthly RENT price for LAND in Latvia
+  regional-data-land-rent-monthly-latvia:
+    handler: src/avg-regional-data.run
+    timeout: 840
+    environment:
+      REGION: latvia
+      PROPERTY_CATEGORY: land
+      PROPERTY_TYPE: rent
 
 plugins:
   - serverless-webpack
