@@ -69,7 +69,7 @@ export const run = async (event, context, callback) => {
     ...Object.keys(stats).filter((key) => key !== 'all').map((key) => stats[key]),
   ].map((row) => `"${row}"`).join(',');
 
-  github.appendToFile(
+  await github.appendToFile(
     `${category}/${type}-monthly-${process.env.REGION}.csv`,
     row,
     `Monthly data (${category}, ${type}, ${process.env.REGION}): ${start.substr(0, 10)} - ${end.substr(0, 10)}`,

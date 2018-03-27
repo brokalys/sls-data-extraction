@@ -57,7 +57,7 @@ export const run = async (event, context, callback) => {
 
   connection.end();
 
-  github.appendToFile(
+  await github.appendToFile(
     `${category}/${type}-${duration}.csv`,
     `"${start.substr(0, 10)}","${end.substr(0, 10)}","${stats['Rīga']}","${stats['Āgenskalns']}","${stats['Atgāzene']}","${stats['Avoti']}","${stats['Beberbeķi']}","${stats['Berģi']}","${stats['Bieriņi']}","${stats['Bišumuiža']}","${stats['Bolderāja']}","${stats['Brasa']}","${stats['Brekši']}","${stats['Bukulti']}","${stats['Buļļi']}","${stats['Centrs']}","${stats['Čiekurkalns']}","${stats['Daugavgrīva']}","${stats['Dreiliņi']}","${stats['Dzirciems']}","${stats['Dārzciems']}","${stats['Dārziņi']}","${stats['Grīziņkalns']}","${stats['Imanta']}","${stats['Iļģuciems']}","${stats['Jaunciems']}","${stats['Jugla']}","${stats['Katlakalns']}","${stats['Kleisti']}","${stats['Kundziņsala']}","${stats['Ķengarags']}","${stats['Ķīpsala']}","${stats['Mangaļsala']}","${stats['Maskavas forstate']}","${stats['Mežaparks']}","${stats['Mežciems']}","${stats['Mīlgrāvis']}","${stats['Mūkupurvs']}","${stats['Pleskodāle']}","${stats['Purvciems']}","${stats['Pētersala-Andrejsala']}","${stats['Pļavnieki']}","${stats['Rumbula']}","${stats['Salas']}","${stats['Sarkandaugava']}","${stats['Skanste']}","${stats['Šķirotava']}","${stats['Spilve']}","${stats['Suži']}","${stats['Šampēteris']}","${stats['Teika']}","${stats['Torņakalns']}","${stats['Trīsciems']}","${stats['Vecdaugava']}","${stats['Vecmilgrāvis']}","${stats['Vecpilsēta']}","${stats['Vecāķi']}","${stats['Voleri']}","${stats['Zasulauks']}","${stats['Ziepniekkalns']}","${stats['Zolitūde']}"`,
     `Weekly data (${category}, ${type}): ${start.substr(0, 10)} - ${end.substr(0, 10)}`

@@ -1,6 +1,7 @@
 'use strict';
 
 const db      = require('./lib/db');
+const github  = require('./lib/github');
 const moment  = require('moment');
 const octokit = require('@octokit/rest')();
 const Buffer  = require('safe-buffer').Buffer;
