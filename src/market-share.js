@@ -35,9 +35,6 @@ export const run = async (event, context, callback) => {
   const total = data.map(({ count }) => count).reduce((a, b) => a + b);
 
   const stats = {
-    start,
-    end,
-
     'ss.lv':        (((data.find(({ source }) => source === 'ss.lv') || {}).count || 0) / total).toFixed(2),
     'city24.lv':    (((data.find(({ source }) => source === 'city24.lv') || {}).count || 0) / total).toFixed(2),
     'dada.lv':      (((data.find(({ source }) => source === 'dada.lv') || {}).count || 0) / total).toFixed(2),
@@ -53,36 +50,11 @@ export const run = async (event, context, callback) => {
 
   connection.end();
 
-  await uploadToGithub(stats);
+  await github.appendToFile(
+    'weekly-market-share.csv',
+    `"${start.substr(0, 10)}","${end.substr(0, 10)}","${stats['ss.lv']}","${stats['city24.lv']}","${stats['dada.lv']}","${stats['reklama.lv']}","${stats['elots.lv']}","${stats['zip.lv']}","${stats['santims.lv']}","${stats['cityreal.lv']}","${stats['takari.eu']}","${stats.other}"`,
+    `Weekly data: ${start.substr(0, 10)} - ${end.substr(0, 10)}`
+  );
 
   callback(null, stats);
-};
-
-const uploadToGithub = async (data) => {
-  await octokit.authenticate({
-    type: 'token',
-    token: process.env.GITHUB_TOKEN,
-  });
-
-  const { data: currentFile } = await octokit.repos.getContent({
-    owner: 'brokalys',
-    repo: 'data',
-    path: 'data/weekly-market-share.csv',
-  });
-
-  let content = new Buffer(currentFile.content, 'base64').toString();
-  content += `"${data.start.substr(0, 10)}","${data.end.substr(0, 10)}","${data['ss.lv']}","${data['city24.lv']}","${data['dada.lv']}","${data['reklama.lv']}","${data['elots.lv']}","${data['zip.lv']}","${data['santims.lv']}","${data['cityreal.lv']}","${data['takari.eu']}","${data.other}"\n`;
-
-  await octokit.repos.updateFile({
-    owner: 'brokalys',
-    repo: 'data',
-    path: currentFile.path,
-    message: `Weekly data: ${data.start} - ${data.end}`,
-    content: new Buffer(content).toString('base64'),
-    sha: currentFile.sha,
-    author: {
-      name: 'Brokalys bot',
-      email: 'noreply@brokalys.com',
-    },
-  });
 };

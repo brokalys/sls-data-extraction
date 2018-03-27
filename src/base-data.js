@@ -1,10 +1,9 @@
 'use strict';
 
 const db      = require('./lib/db');
+const github  = require('./lib/github');
 const moment  = require('moment');
 const numbers = require('numbers');
-const octokit = require('@octokit/rest')();
-const Buffer  = require('safe-buffer').Buffer;
 
 export const run = async (event, context, callback) => {
   const category = process.env.PROPERTY_CATEGORY;
@@ -37,7 +36,6 @@ export const run = async (event, context, callback) => {
   const prices = data.map(({ price }) => price);
 
   const stats = {
-    date:         start,
     count:        prices.length,
     min:          parseInt(numbers.basic.min(prices), 10),
     max:          parseInt(numbers.basic.max(prices), 10),
@@ -49,36 +47,11 @@ export const run = async (event, context, callback) => {
 
   connection.end();
 
-  await uploadToGithub(category, stats);
+  await github.appendToFile(
+    `daily-${category.replace(/_/g, '-')}.csv`,
+    `"${start.substr(0, 10)}","${stats.count}","${stats.min}","${stats.max}","${stats.mean}","${stats.median}","${stats.mode}","${stats.standardDev}"`,
+    `Daily data: ${start.substr(0, 10)}`
+  );
 
   callback(null, stats);
-};
-
-const uploadToGithub = async (category, data) => {
-  await octokit.authenticate({
-    type: 'token',
-    token: process.env.GITHUB_TOKEN,
-  });
-
-  const { data: currentFile } = await octokit.repos.getContent({
-    owner: 'brokalys',
-    repo: 'data',
-    path: `data/daily-${category.replace(/_/g, '-')}.csv`,
-  });
-
-  let content = new Buffer(currentFile.content, 'base64').toString();
-  content += `"${data.date.substr(0, 10)}","${data.count}","${data.min}","${data.max}","${data.mean}","${data.median}","${data.mode}","${data.standardDev}"\n`;
-
-  await octokit.repos.updateFile({
-    owner: 'brokalys',
-    repo: 'data',
-    path: currentFile.path,
-    message: `Daily data: ${data.date.substr(0, 10)}`,
-    content: new Buffer(content).toString('base64'),
-    sha: currentFile.sha,
-    author: {
-      name: 'Brokalys bot',
-      email: 'noreply@brokalys.com',
-    },
-  });
 };
