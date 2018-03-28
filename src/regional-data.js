@@ -2,6 +2,7 @@
 
 const db      = require('./lib/db');
 const github  = require('./lib/github');
+const typeCast = require('./lib/mysql-typecast').default;
 const geojson = require('../data/riga-geojson.json');
 const moment  = require('moment');
 const numbers = require('numbers');
@@ -9,10 +10,9 @@ const numbers = require('numbers');
 export const run = async (event, context, callback) => {
   const type = process.env.PROPERTY_TYPE;
   const category = process.env.PROPERTY_CATEGORY;
-  const duration = process.env.DURATION;
 
-  const start = moment.utc().subtract(1, duration === 'weekly' ? 'week' : 'month').startOf(duration === 'weekly' ? 'isoWeek' : 'month').toISOString();
-  const end = moment.utc().subtract(1, duration === 'weekly' ? 'week' : 'month').endOf(duration === 'weekly' ? 'isoWeek' : 'month').toISOString();
+  const start = moment.utc().subtract(1, 'month').startOf('month').toISOString();
+  const end = moment.utc().subtract(1, 'month').endOf('month').toISOString();
 
   const regions = geojson.features.map((feature) => ({
     name: feature.properties.apkaime,
@@ -38,16 +38,11 @@ export const run = async (event, context, callback) => {
 
       values: [start, end, category, type, `POLYGON((${region.polygon}))`],
 
-      typeCast(field, next) {
-        if (field.type === 'NEWDECIMAL') {
-          return parseFloat(field.string());
-        }
-
-        return next();
-      },
+      typeCast,
     });
 
     const prices = data.map(({ price }) => price);
+
     allPrices.push(...prices);
 
     stats[region.name] = numbers.statistic.median(prices) || 0;
@@ -58,7 +53,7 @@ export const run = async (event, context, callback) => {
   connection.end();
 
   await github.appendToFile(
-    `${category}/${type}-${duration}.csv`,
+    `${category}/${type}-monthly.csv`,
     `"${start.substr(0, 10)}","${end.substr(0, 10)}","${stats['Rīga']}","${stats['Āgenskalns']}","${stats['Atgāzene']}","${stats['Avoti']}","${stats['Beberbeķi']}","${stats['Berģi']}","${stats['Bieriņi']}","${stats['Bišumuiža']}","${stats['Bolderāja']}","${stats['Brasa']}","${stats['Brekši']}","${stats['Bukulti']}","${stats['Buļļi']}","${stats['Centrs']}","${stats['Čiekurkalns']}","${stats['Daugavgrīva']}","${stats['Dreiliņi']}","${stats['Dzirciems']}","${stats['Dārzciems']}","${stats['Dārziņi']}","${stats['Grīziņkalns']}","${stats['Imanta']}","${stats['Iļģuciems']}","${stats['Jaunciems']}","${stats['Jugla']}","${stats['Katlakalns']}","${stats['Kleisti']}","${stats['Kundziņsala']}","${stats['Ķengarags']}","${stats['Ķīpsala']}","${stats['Mangaļsala']}","${stats['Maskavas forstate']}","${stats['Mežaparks']}","${stats['Mežciems']}","${stats['Mīlgrāvis']}","${stats['Mūkupurvs']}","${stats['Pleskodāle']}","${stats['Purvciems']}","${stats['Pētersala-Andrejsala']}","${stats['Pļavnieki']}","${stats['Rumbula']}","${stats['Salas']}","${stats['Sarkandaugava']}","${stats['Skanste']}","${stats['Šķirotava']}","${stats['Spilve']}","${stats['Suži']}","${stats['Šampēteris']}","${stats['Teika']}","${stats['Torņakalns']}","${stats['Trīsciems']}","${stats['Vecdaugava']}","${stats['Vecmilgrāvis']}","${stats['Vecpilsēta']}","${stats['Vecāķi']}","${stats['Voleri']}","${stats['Zasulauks']}","${stats['Ziepniekkalns']}","${stats['Zolitūde']}"`,
     `Weekly data (${category}, ${type}): ${start.substr(0, 10)} - ${end.substr(0, 10)}`
   );

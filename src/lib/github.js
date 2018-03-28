@@ -1,7 +1,7 @@
 const octokit = require('@octokit/rest')();
 const Buffer  = require('safe-buffer').Buffer;
 
-export const appendToFile = async (filename, data, commitMessage = undefined) => {
+export const appendToFile = async (filename, data, commitMessage = null) => {
   await octokit.authenticate({
     type: 'token',
     token: process.env.GITHUB_TOKEN,

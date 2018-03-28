@@ -60,7 +60,6 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: apartment
       PROPERTY_TYPE: sell
-      DURATION: monthly
     events:
       - schedule: cron(30 0 1 * ? *)
 
@@ -72,7 +71,6 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: apartment
       PROPERTY_TYPE: rent
-      DURATION: monthly
     events:
       - schedule: cron(35 0 1 * ? *)
 
@@ -84,7 +82,6 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: house
       PROPERTY_TYPE: sell
-      DURATION: monthly
     events:
       - schedule: cron(40 0 1 * ? *)
 
@@ -96,7 +93,6 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: house
       PROPERTY_TYPE: rent
-      DURATION: monthly
     events:
       - schedule: cron(45 0 1 * ? *)
 
@@ -108,7 +104,6 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: land
       PROPERTY_TYPE: sell
-      DURATION: monthly
     events:
       - schedule: cron(50 0 1 * ? *)
 
@@ -120,7 +115,6 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: land
       PROPERTY_TYPE: rent
-      DURATION: monthly
     events:
       - schedule: cron(55 0 1 * ? *)
 
