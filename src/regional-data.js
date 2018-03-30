@@ -43,6 +43,7 @@ export const run = async (event, context, callback) => {
       AND lng IS NOT NULL
       AND location_country = "Latvia"
       AND price > 1
+      ${ type === 'rent' ? 'AND (rent_type IS NULL OR rent_type = "monthly")' : '' }
     `,
 
     values: [start, end, category, type],
