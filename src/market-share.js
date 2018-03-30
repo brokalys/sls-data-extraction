@@ -1,10 +1,9 @@
 'use strict';
 
-const db      = require('./lib/db');
-const github  = require('./lib/github');
-const moment  = require('moment');
-const octokit = require('@octokit/rest')();
-const Buffer  = require('safe-buffer').Buffer;
+const db       = require('./lib/db');
+const github   = require('./lib/github');
+const typeCast = require('./lib/mysql-typecast').default;
+const moment   = require('moment');
 
 export const run = async (event, context, callback) => {
   const connection = await db.connect();
@@ -24,13 +23,7 @@ export const run = async (event, context, callback) => {
 
     values: [start, end],
 
-    typeCast(field, next) {
-      if (field.type === 'NEWDECIMAL') {
-        return parseFloat(field.string());
-      }
-
-      return next();
-    },
+    typeCast,
   });
 
   const total = data.map(({ count }) => count).reduce((a, b) => a + b);

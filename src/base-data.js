@@ -1,9 +1,10 @@
 'use strict';
 
-const db      = require('./lib/db');
-const github  = require('./lib/github');
-const moment  = require('moment');
-const numbers = require('numbers');
+const db       = require('./lib/db');
+const github   = require('./lib/github');
+const typeCast = require('./lib/mysql-typecast').default;
+const moment   = require('moment');
+const numbers  = require('numbers');
 
 export const run = async (event, context, callback) => {
   const category = process.env.PROPERTY_CATEGORY;
@@ -24,13 +25,7 @@ export const run = async (event, context, callback) => {
 
     values: [start, end, category],
 
-    typeCast(field, next) {
-      if (field.type === 'NEWDECIMAL') {
-        return parseFloat(field.string());
-      }
-
-      return next();
-    },
+    typeCast,
   });
 
   const prices = data.map(({ price }) => price);
