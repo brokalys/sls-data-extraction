@@ -9,6 +9,7 @@ const geojson = {
 };
 const moment  = require('moment');
 const numbers = require('numbers');
+const inside = require('point-in-polygon');
 
 export const run = async (event, context, callback) => {
   const type = process.env.PROPERTY_TYPE;
@@ -24,45 +25,51 @@ export const run = async (event, context, callback) => {
   })).map((feature) => ({
     name: feature.name,
     polygons: activeRegion === 'riga' ? [feature.polygons] : feature.polygons,
+    prices: [],
   }));
 
   const stats = {};
   const allPrices = [];
+
   const connection = await db.connect();
+  const [data] = await connection.query({
+    sql: `
+      SELECT price, lat, lng
+      FROM properties
+      WHERE published_at BETWEEN ? AND ?
+      AND category = ?
+      AND type = ?
+      AND lat IS NOT NULL
+      AND lng IS NOT NULL
+      AND location_country = "Latvia"
+      AND price > 1
+    `,
 
-  for (var i = 0; i < regions.length; i++) {
-    const region = regions[i];
-    console.log(region.name);
+    values: [start, end, category, type],
+    typeCast,
+  });
+  connection.end();
 
-    const polygons = region.polygons.map((row) => {
-      return `ST_Contains(ST_GeomFromText('POLYGON((${row[0].map((row) => row.join(' ')).join(', ')}))'), point(lng, lat))`;
-    }).join(' OR ');
+  data.forEach((row) => {
+    regions.map((region) => {
+      var isInside = region.polygons
+        .find((polygon) => inside([row.lng, row.lat], polygon[0]));
 
-    const [data] = await connection.query({
-      sql: `
-        SELECT price
-        FROM properties
-        WHERE published_at BETWEEN ? AND ?
-        AND category = ?
-        AND type = ?
-        AND (${polygons})
-      `,
+      if (isInside) {
+        region.prices.push(row.price);
+      }
 
-      values: [start, end, category, type],
-
-      typeCast,
+      return region;
     });
+  });
 
-    const prices = data.map(({ price }) => price);
-
+  regions.forEach(({ name, prices }) => {
     allPrices.push(...prices);
 
-    stats[region.name] = numbers.statistic.median(prices) || 0;
-  }
+    stats[name] = numbers.statistic.median(prices) || 0;
+  });
 
   stats.all = numbers.statistic.median(allPrices) || 0;
-
-  connection.end();
 
   let csv = [
     start.substr(0, 10),

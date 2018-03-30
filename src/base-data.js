@@ -19,6 +19,7 @@ export const run = async (event, context, callback) => {
       SELECT price
       FROM properties
       WHERE created_at BETWEEN ? AND ?
+      AND (source LIKE "%.lv" OR source LIKE "%.eu")
       AND price >= 1
       AND type = ?
     `,
