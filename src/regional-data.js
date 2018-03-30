@@ -20,10 +20,10 @@ export const run = async (event, context, callback) => {
 
   const regions = geojson[activeRegion].features.map((feature) => ({
     name: feature.properties.apkaime,
-    polygons: feature.geometry.coordinates[0],
+    polygons: feature.geometry.coordinates,
   })).map((feature) => ({
     name: feature.name,
-    polygons: process.env.REGION === 'riga' ? [feature.polygons] : feature.polygons,
+    polygons: activeRegion === 'riga' ? [feature.polygons] : feature.polygons,
   }));
 
   const stats = {};
@@ -34,7 +34,9 @@ export const run = async (event, context, callback) => {
     const region = regions[i];
     console.log(region.name);
 
-    const polygons = region.polygons.splice(0,1).map((row) => row.map((row) => row.join(' ')).join(', ')).map((row) => `ST_Contains(ST_GeomFromText('POLYGON((${row}))'), point(lng, lat))`).join(' OR ');
+    const polygons = region.polygons.map((row) => {
+      return `ST_Contains(ST_GeomFromText('POLYGON((${row[0].map((row) => row.join(' ')).join(', ')}))'), point(lng, lat))`;
+    }).join(' OR ');
 
     const [data] = await connection.query({
       sql: `
