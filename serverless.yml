@@ -115,6 +115,7 @@ functions:
   # Median monthly SELLING price for APARTMENTS in Latvia
   regional-data-apartment-sell-monthly-lv:
     handler: src/regional-data.run
+    timeout: 200
     environment:
       REGION: latvia
       PROPERTY_CATEGORY: apartment
@@ -125,6 +126,7 @@ functions:
   # Median monthly RENT price for APARTMENTS in Latvia
   regional-data-apartment-rent-monthly-lv:
     handler: src/regional-data.run
+    timeout: 200
     environment:
       REGION: latvia
       PROPERTY_CATEGORY: apartment
@@ -135,6 +137,7 @@ functions:
   # Median monthly SELLING price for HOUSES in Latvia
   regional-data-house-sell-monthly-lv:
     handler: src/regional-data.run
+    timeout: 200
     environment:
       REGION: latvia
       PROPERTY_CATEGORY: house
@@ -145,6 +148,7 @@ functions:
   # Median monthly RENT price for HOUSES in Latvia
   regional-data-house-rent-monthly-lv:
     handler: src/regional-data.run
+    timeout: 200
     environment:
       REGION: latvia
       PROPERTY_CATEGORY: house
@@ -155,6 +159,7 @@ functions:
   # Median monthly SELLING price for LAND in Latvia
   regional-data-land-sell-monthly-lv:
     handler: src/regional-data.run
+    timeout: 200
     environment:
       REGION: latvia
       PROPERTY_CATEGORY: land
@@ -163,6 +168,7 @@ functions:
   # Median monthly RENT price for LAND in Latvia
   regional-data-land-rent-monthly-lv:
     handler: src/regional-data.run
+    timeout: 200
     environment:
       REGION: latvia
       PROPERTY_CATEGORY: land
