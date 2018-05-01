@@ -82,7 +82,7 @@ export const run = async (event, context, callback) => {
   await github.appendToFile(
     `${category}/${type}-monthly-${activeRegion}.csv`,
     csv,
-    `Weekly data (${category}, ${type}, ${activeRegion}): ${start.substr(0, 10)} - ${end.substr(0, 10)}`
+    `Monthly data (${category}, ${type}, ${activeRegion}): ${start.substr(0, 10)} - ${end.substr(0, 10)}`
   );
 
   callback(null, stats);
