@@ -11,7 +11,7 @@ Takes care of extracting scheduled statistical data from the Brokalys real estat
 
 ## Installation
 ```sh
-yarn install
+npm install
 ```
 
 ## Usage
