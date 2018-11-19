@@ -8,3 +8,6 @@ script:
     - npm install -g serverless
     - "echo 'TRAVIS: true' >> serverless.env.yml"
     - sls deploy
+branches:
+  only:
+  - master
