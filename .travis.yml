@@ -5,9 +5,8 @@ cache:
   directories:
     - node_modules
 script:
-    - npm install -g serverless
     - "echo 'TRAVIS: true' >> serverless.env.yml"
-    - sls deploy
+    - npm run deploy -- --conceal
 branches:
   only:
   - master

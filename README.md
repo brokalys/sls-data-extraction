@@ -7,8 +7,7 @@ Takes care of extracting scheduled statistical data from the Brokalys real estat
 
 ## Requirements
 - Node
-- Yarn
-- Serverless (installed globally)
+- NPM
 
 ## Installation
 ```sh
@@ -17,7 +16,7 @@ yarn install
 
 ## Usage
 ```sh
-sls invoke local -f base-data-sell
+npm run start -- -f base-data-sell
 ```
 
 ### Available functions
@@ -32,8 +31,8 @@ Deployment is taken care by travis. If, for some odd reason, it's required to de
 
 ```sh
 # In order to deploy all functions
-sls deploy
+npm run deploy
 
 # In order to deploy individual functions
-sls deploy -f base-data-sell
+npm run deploy -- -f base-data-sell
 ```
