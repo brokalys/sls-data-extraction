@@ -61,6 +61,14 @@ functions:
       PROPERTY_TYPE: sell
     events:
       - schedule: cron(30 0 1 * ? *)
+  regional-price-per-sqm-apartment-sell-monthly:
+    handler: src/regional-price-per-sqm.run
+    environment:
+      REGION: riga
+      PROPERTY_CATEGORY: apartment
+      PROPERTY_TYPE: sell
+    events:
+      - schedule: cron(30 0 1 * ? *)
 
   # Median monthly RENT price for APARTMENTS in Riga
   regional-data-apartment-rent-monthly:
