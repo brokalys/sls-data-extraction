@@ -62,6 +62,7 @@ functions:
     events:
       - schedule: cron(30 0 1 * ? *)
   regional-price-per-sqm-apartment-sell-monthly:
+    name: RegionalPricePerSqmApartmentSellMonthly
     handler: src/regional-price-per-sqm.run
     environment:
       REGION: riga
