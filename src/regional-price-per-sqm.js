@@ -42,9 +42,9 @@ export const run = async (event, context, callback) => {
       AND lat IS NOT NULL
       AND lng IS NOT NULL
       AND location_country = "Latvia"
-      AND price > 0
+      AND price > 1
       AND area > 1
-      AND area = "m2"
+      AND area_measurement = "m2"
       ${ type === 'rent' ? 'AND (rent_type IS NULL OR rent_type = "monthly")' : '' }
     `,
 
@@ -69,10 +69,10 @@ export const run = async (event, context, callback) => {
   regions.forEach(({ name, prices }) => {
     allPrices.push(...prices);
 
-    stats[name] = numbers.statistic.median(prices) || 0;
+    stats[name] = parseFloat(numbers.statistic.median(prices) || 0).toFixed(2);
   });
 
-  stats.all = numbers.statistic.median(allPrices) || 0;
+  stats.all = parseFloat(numbers.statistic.median(allPrices) || 0).toFixed(2);
 
   let csv = [
     start.substr(0, 10),
