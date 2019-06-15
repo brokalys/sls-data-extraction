@@ -268,4 +268,6 @@ plugins:
   - serverless-webpack
 
 custom:
-  webpackIncludeModules: true
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
