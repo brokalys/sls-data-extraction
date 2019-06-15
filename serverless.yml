@@ -3,7 +3,7 @@ service: sls-data-extraction
 provider:
   name: aws
   region: eu-west-1
-  runtime: nodejs8.10
+  runtime: nodejs10.x
   cfLogs: true
   versionFunctions: false
   environment:
@@ -263,9 +263,3 @@ functions:
       REGION: latvia
       PROPERTY_CATEGORY: land
       PROPERTY_TYPE: rent
-
-plugins:
-  - serverless-webpack
-
-custom:
-  webpackIncludeModules: true
