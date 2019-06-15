@@ -6,6 +6,7 @@ cache:
     - node_modules
 script:
     - "echo 'TRAVIS: true' >> serverless.env.yml"
+after_success:
     - npm run deploy -- --conceal
 branches:
   only:
