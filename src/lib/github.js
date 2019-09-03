@@ -1,13 +1,10 @@
-const octokit = require('@octokit/rest')();
+const octokit = new require('@octokit/rest')({
+  auth: process.env.GITHUB_TOKEN,
+});
 const Buffer  = require('safe-buffer').Buffer;
 
 export const appendToFile = async (filename, data, commitMessage = null) => {
-  await octokit.authenticate({
-    type: 'token',
-    token: process.env.GITHUB_TOKEN,
-  });
-
-  const { data: currentFile } = await octokit.repos.getContent({
+  const { data: currentFile } = await octokit.repos.getContents({
     owner: 'brokalys',
     repo: 'data',
     path: `data/${filename}`,
@@ -16,7 +13,7 @@ export const appendToFile = async (filename, data, commitMessage = null) => {
   let content = new Buffer(currentFile.content, 'base64').toString();
   content += data + "\n";
 
-  await octokit.repos.updateFile({
+  await octokit.repos.createOrUpdateFile({
     owner: 'brokalys',
     repo: 'data',
     path: currentFile.path,
