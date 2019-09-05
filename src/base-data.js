@@ -33,12 +33,12 @@ export const run = async (event, context, callback) => {
 
   const stats = {
     count:        prices.length,
-    min:          parseInt(numbers.basic.min(prices), 10),
-    max:          parseInt(numbers.basic.max(prices), 10),
-    mean:         parseInt(numbers.statistic.mean(prices), 10),
-    median:       parseInt(numbers.statistic.median(prices), 10),
-    mode:         parseInt(numbers.statistic.mode(prices), 10),
-    standardDev:  parseInt(numbers.statistic.standardDev(prices), 10),
+    min:          parseInt(numbers.basic.min(prices), 10) || 0,
+    max:          parseInt(numbers.basic.max(prices), 10) || 0,
+    mean:         parseInt(numbers.statistic.mean(prices), 10) || 0,
+    median:       parseInt(numbers.statistic.median(prices), 10) || 0,
+    mode:         parseInt(numbers.statistic.mode(prices), 10) || 0,
+    standardDev:  parseInt(numbers.statistic.standardDev(prices), 10) || 0,
   };
 
   connection.end();
