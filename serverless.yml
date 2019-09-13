@@ -6,6 +6,7 @@ provider:
   runtime: nodejs8.10
   cfLogs: true
   versionFunctions: false
+  logRetentionInDays: 7
   environment:
     DB_HOST: ${file(serverless.env.yml):DB_HOST, env:DB_HOST}
     DB_DATABASE: ${file(serverless.env.yml):DB_DATABASE, env:DB_DATABASE}
