@@ -1,20 +1,18 @@
-'use strict';
-
-const db       = require('./lib/db');
-const github   = require('./lib/github');
-const typeCast = require('./lib/mysql-typecast').default;
-const moment   = require('moment');
-const numbers  = require('numbers');
+import connection from './lib/db';
+import github from './lib/github';
+import typeCast from './lib/mysql-typecast';
+import moment from 'moment';
+import numbers from 'numbers';
 
 export const run = async (event, context, callback) => {
-  const category = process.env.PROPERTY_CATEGORY;
+  context.callbackWaitsForEmptyEventLoop = false;
 
-  const connection = await db.connect();
+  const category = process.env.PROPERTY_CATEGORY;
 
   const start = moment.utc().subtract(1, 'day').startOf('day').toISOString();
   const end = moment.utc().subtract(1, 'day').endOf('day').toISOString();
 
-  const [data] = await connection.query({
+  const data = await connection.query({
     sql: `
       SELECT price
       FROM properties

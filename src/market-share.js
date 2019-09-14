@@ -1,17 +1,15 @@
-'use strict';
-
-const db       = require('./lib/db');
-const github   = require('./lib/github');
-const typeCast = require('./lib/mysql-typecast').default;
-const moment   = require('moment');
+import connection from './lib/db';
+import github from './lib/github';
+import typeCast from './lib/mysql-typecast';
+import moment from 'moment';
 
 export const run = async (event, context, callback) => {
-  const connection = await db.connect();
+  context.callbackWaitsForEmptyEventLoop = false;
 
   const start = moment.utc().subtract(1, 'week').startOf('isoWeek').toISOString();
   const end = moment.utc().subtract(1, 'week').endOf('isoWeek').toISOString();
 
-  const [data] = await connection.query({
+  const data = await connection.query({
     sql: `
       SELECT source, COUNT(*) as count
       FROM properties

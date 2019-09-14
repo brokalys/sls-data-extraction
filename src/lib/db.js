@@ -1,9 +1,10 @@
-const mysql = require('mysql2/promise');
-
-export const connect = async () => await mysql.createConnection({
-  host:           process.env.DB_HOST,
-  user:           process.env.DB_USERNAME,
-  password:       process.env.DB_PASSWORD,
-  database:       process.env.DB_DATABASE,
-  connectTimeout: 1000,
+const connection = require('serverless-mysql')({
+  config: {
+    host:           process.env.DB_HOST,
+    database:       process.env.DB_DATABASE,
+    user:           process.env.DB_USERNAME,
+    password:       process.env.DB_PASSWORD,
+    connectTimeout: 1000,
+  },
 });
+export default connection;

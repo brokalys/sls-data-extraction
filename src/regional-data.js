@@ -1,17 +1,18 @@
-'use strict';
+import connection from './lib/db';
+import github from './lib/github';
+import typeCast from './lib/mysql-typecast';
+import moment from 'moment';
+import numbers from 'numbers';
+import inside from 'point-in-polygon';
 
-const db      = require('./lib/db');
-const github  = require('./lib/github');
-const typeCast = require('./lib/mysql-typecast').default;
 const geojson = {
   riga: require('../data/riga-geojson.json'),
   latvia: require('../data/latvia-geojson.json'),
 };
-const moment  = require('moment');
-const numbers = require('numbers');
-const inside = require('point-in-polygon');
 
 export const run = async (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
   const type = process.env.PROPERTY_TYPE;
   const category = process.env.PROPERTY_CATEGORY;
   const activeRegion = process.env.REGION;
@@ -31,8 +32,7 @@ export const run = async (event, context, callback) => {
   const stats = {};
   const allPrices = [];
 
-  const connection = await db.connect();
-  const [data] = await connection.query({
+  const data = await connection.query({
     sql: `
       SELECT price, lat, lng
       FROM properties
