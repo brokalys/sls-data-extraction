@@ -3,7 +3,7 @@ const octokit = new require('@octokit/rest')({
 });
 const Buffer  = require('safe-buffer').Buffer;
 
-export const appendToFile = async (filename, data, commitMessage = null) => {
+const appendToFile = async (filename, data, commitMessage = null) => {
   const { data: currentFile } = await octokit.repos.getContents({
     owner: 'brokalys',
     repo: 'data',
@@ -30,3 +30,5 @@ export const appendToFile = async (filename, data, commitMessage = null) => {
     },
   });
 };
+
+export default { appendToFile };
