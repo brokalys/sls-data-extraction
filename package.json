@@ -5,7 +5,7 @@
   "author": "Matiss Janis Aboltins <matiss@mja.lv>",
   "license": "MIT",
   "dependencies": {
-    "@octokit/rest": "^16.28.9",
+    "@octokit/rest": "^17.1.0",
     "moment": "^2.24.0",
     "numbers": "^0.7.0",
     "point-in-polygon": "^1.0.1",
