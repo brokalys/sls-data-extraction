@@ -3,7 +3,7 @@ service: sls-data-extraction
 provider:
   name: aws
   region: eu-west-1
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   cfLogs: true
   versionFunctions: false
   logRetentionInDays: 7
