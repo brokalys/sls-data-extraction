@@ -275,6 +275,12 @@ custom:
     includeModules: true
 
   alerts:
+    topics:
+      alarm:
+        topic: ${self:service}-${opt:stage}-alerts-alarm
+        notifications:
+          - protocol: email
+            endpoint: matiss@brokalys.com
     alarms:
       - functionErrors
       - functionInvocations
