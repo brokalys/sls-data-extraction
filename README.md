@@ -16,7 +16,7 @@ yarn install
 
 ## Usage
 ```sh
-yarn start -- -f base-data-sell
+yarn start -f base-data-sell
 ```
 
 ### Available functions
@@ -56,5 +56,5 @@ Deployment is taken care by travis. If, for some odd reason, it's required to de
 yarn deploy
 
 # In order to deploy individual functions
-yarn deploy -- -f base-data-sell
+yarn deploy -f base-data-sell
 ```
