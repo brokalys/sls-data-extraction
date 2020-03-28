@@ -1,7 +1,9 @@
-const octokit = new require('@octokit/rest')({
+const { Octokit } = require('@octokit/rest');
+const Buffer  = require('safe-buffer').Buffer;
+
+const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
 });
-const Buffer  = require('safe-buffer').Buffer;
 
 const appendToFile = async (filename, data, commitMessage = null) => {
   const { data: currentFile } = await octokit.repos.getContents({
