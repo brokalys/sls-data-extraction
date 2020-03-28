@@ -22,6 +22,8 @@ functions:
       PROPERTY_CATEGORY: sell
     events:
       - schedule: cron(15 0 * * ? *)
+    alarms:
+      - functionInvocations
 
   # Daily statistics for all properties: buy
   base-data-buy:
@@ -30,6 +32,8 @@ functions:
       PROPERTY_CATEGORY: buy
     events:
       - schedule: cron(10 0 * * ? *)
+    alarms:
+      - functionInvocations
 
   # Daily statistics for all properties: rent
   base-data-rent:
@@ -38,6 +42,8 @@ functions:
       PROPERTY_CATEGORY: rent
     events:
       - schedule: cron(5 0 * * ? *)
+    alarms:
+      - functionInvocations
 
   # Daily statistics for all properties: want-to-rent
   base-data-want-to-rent:
@@ -46,6 +52,8 @@ functions:
       PROPERTY_CATEGORY: want_to_rent
     events:
       - schedule: cron(0 0 * * ? *)
+    alarms:
+      - functionInvocations
 
   # Weekly market share analysis
   market-share:
@@ -281,6 +289,9 @@ custom:
         notifications:
           - protocol: email
             endpoint: matiss@brokalys.com
+    definitions:
+      functionInvocations:
+        period: 86400 # 1 day
+        treatMissingData: breaching
     alarms:
       - functionErrors
-      - functionInvocations
