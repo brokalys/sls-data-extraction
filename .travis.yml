@@ -9,6 +9,6 @@ script:
 deploy:
   skip_cleanup: true
   provider: script
-  script: yarn deploy --conceal
+  script: yarn deploy:ci
   on:
     branch: master

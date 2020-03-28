@@ -26,6 +26,7 @@
   },
   "scripts": {
     "start": "serverless invoke local",
-    "deploy": "serverless deploy"
+    "deploy": "serverless deploy",
+    "deploy:ci": "yarn deploy --conceal --stage prod"
   }
 }

@@ -4,6 +4,7 @@ provider:
   name: aws
   region: eu-west-1
   runtime: nodejs12.x
+  stage: ${opt:stage, 'dev'}
   cfLogs: true
   versionFunctions: false
   logRetentionInDays: 7
@@ -71,7 +72,7 @@ functions:
     events:
       - schedule: cron(30 0 1 * ? *)
   regional-price-per-sqm-apartment-sell-monthly:
-    name: RegionalPricePerSqmApartmentSellMonthly
+    name: ${self:provider.stage}-RegionalPricePerSqmApartmentSellMonthly
     handler: src/regional-price-per-sqm.run
     environment:
       REGION: riga
@@ -90,7 +91,7 @@ functions:
     events:
       - schedule: cron(35 0 1 * ? *)
   regional-price-per-sqm-apartment-rent-monthly:
-    name: RegionalPricePerSqmApartmentRentMonthly
+    name: ${self:provider.stage}-RegionalPricePerSqmApartmentRentMonthly
     handler: src/regional-price-per-sqm.run
     environment:
       REGION: riga
@@ -109,7 +110,7 @@ functions:
     events:
       - schedule: cron(40 0 1 * ? *)
   regional-price-per-sqm-house-sell-monthly:
-    name: RegionalPricePerSqmHouseSellMonthly
+    name: ${self:provider.stage}-RegionalPricePerSqmHouseSellMonthly
     handler: src/regional-price-per-sqm.run
     environment:
       REGION: riga
@@ -128,7 +129,7 @@ functions:
     events:
       - schedule: cron(45 0 1 * ? *)
   regional-price-per-sqm-house-rent-monthly:
-    name: RegionalPricePerSqmHouseRentMonthly
+    name: ${self:provider.stage}-RegionalPricePerSqmHouseRentMonthly
     handler: src/regional-price-per-sqm.run
     environment:
       REGION: riga
@@ -147,7 +148,7 @@ functions:
     events:
       - schedule: cron(50 0 1 * ? *)
   regional-price-per-sqm-land-sell-monthly:
-    name: RegionalPricePerSqmLandSellMonthly
+    name: ${self:provider.stage}-RegionalPricePerSqmLandSellMonthly
     handler: src/regional-price-per-sqm.run
     environment:
       REGION: riga
@@ -166,7 +167,7 @@ functions:
     events:
       - schedule: cron(55 0 1 * ? *)
   regional-price-per-sqm-land-rent-monthly:
-    name: RegionalPricePerSqmLandRentMonthly
+    name: ${self:provider.stage}-RegionalPricePerSqmLandRentMonthly
     handler: src/regional-price-per-sqm.run
     environment:
       REGION: riga
@@ -186,7 +187,7 @@ functions:
     events:
       - schedule: cron(32 0 1 * ? *)
   regional-price-per-sqm-apartment-sell-monthly-lv:
-    name: RegionalPricePerSqmApartmentSellMonthlyLv
+    name: ${self:provider.stage}-RegionalPricePerSqmApartmentSellMonthlyLv
     handler: src/regional-price-per-sqm.run
     environment:
       REGION: latvia
@@ -206,7 +207,7 @@ functions:
     events:
       - schedule: cron(37 0 1 * ? *)
   regional-price-per-sqm-apartment-rent-monthly-lv:
-    name: RegionalPricePerSqmApartmentRentMonthlyLv
+    name: ${self:provider.stage}-RegionalPricePerSqmApartmentRentMonthlyLv
     handler: src/regional-price-per-sqm.run
     environment:
       REGION: latvia
@@ -226,7 +227,7 @@ functions:
     events:
       - schedule: cron(42 0 1 * ? *)
   regional-price-per-sqm-house-sell-monthly-lv:
-    name: RegionalPricePerSqmHouseSellMonthlyLv
+    name: ${self:provider.stage}-RegionalPricePerSqmHouseSellMonthlyLv
     handler: src/regional-price-per-sqm.run
     environment:
       REGION: latvia
@@ -246,7 +247,7 @@ functions:
     events:
       - schedule: cron(47 0 1 * ? *)
   regional-price-per-sqm-house-rent-monthly-lv:
-    name: RegionalPricePerSqmHouseRentMonthlyLv
+    name: ${self:provider.stage}-RegionalPricePerSqmHouseRentMonthlyLv
     handler: src/regional-price-per-sqm.run
     environment:
       REGION: latvia
@@ -285,7 +286,7 @@ custom:
   alerts:
     topics:
       alarm:
-        topic: ${self:service}-alerts-alarm
+        topic: ${self:provider.stage}-${self:service}-alerts-alarm
         notifications:
           - protocol: email
             endpoint: matiss@brokalys.com
