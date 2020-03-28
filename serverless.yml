@@ -267,8 +267,14 @@ functions:
 
 plugins:
   - serverless-webpack
+  - serverless-plugin-aws-alerts
 
 custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+
+  alerts:
+    alarms:
+      - functionErrors
+      - functionInvocations
