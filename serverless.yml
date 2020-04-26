@@ -276,25 +276,8 @@ functions:
 
 plugins:
   - serverless-webpack
-  - serverless-plugin-aws-alerts
 
 custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
-
-  alerts:
-    topics:
-      alarm:
-        topic: ${self:provider.stage}-${self:service}-alerts-alarm
-        notifications:
-          - protocol: email
-            endpoint: matiss@brokalys.com
-    definitions:
-      functionErrors:
-        treatMissingData: notBreaching
-      functionInvocations:
-        period: 86400 # 1 day
-        treatMissingData: breaching
-    alarms:
-      - functionErrors
