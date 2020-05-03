@@ -5,4 +5,4 @@ node_modules
 
 # individual files
 .DS_Store
-serverless.env.yml
+.env

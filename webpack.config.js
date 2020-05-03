@@ -1,5 +1,16 @@
+const webpack       = require('webpack');
 const slsw          = require('serverless-webpack');
 const nodeExternals = require('webpack-node-externals');
+
+require('dotenv').config();
+
+const env = Object.entries(process.env).reduce(
+  (common, [key, value]) => ({
+    ...common,
+    [`process.env.${key}`]: JSON.stringify(value),
+  }),
+  {},
+);
 
 module.exports = {
   entry: slsw.lib.entries,
@@ -22,4 +33,5 @@ module.exports = {
       exclude: /node_modules/,
     }],
   },
+  plugins: [new webpack.DefinePlugin(env)],
 };

@@ -8,12 +8,6 @@ provider:
   cfLogs: true
   versionFunctions: false
   logRetentionInDays: 7
-  environment:
-    DB_HOST: ${file(serverless.env.yml):DB_HOST, env:DB_HOST}
-    DB_DATABASE: ${file(serverless.env.yml):DB_DATABASE, env:DB_DATABASE}
-    DB_USERNAME: ${file(serverless.env.yml):DB_USERNAME, env:DB_USERNAME}
-    DB_PASSWORD: ${file(serverless.env.yml):DB_PASSWORD, env:DB_PASSWORD}
-    GITHUB_TOKEN: ${file(serverless.env.yml):GITHUB_TOKEN, env:GITHUB_TOKEN}
 
 functions:
   # Daily statistics for all properties: sell
