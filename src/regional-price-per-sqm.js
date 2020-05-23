@@ -41,7 +41,6 @@ export const run = async (event, context, callback) => {
       AND type = ?
       AND lat IS NOT NULL
       AND lng IS NOT NULL
-      AND location_country = "Latvia"
       AND price > 1
       AND area > 1
       AND area_measurement = "m2"

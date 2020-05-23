@@ -1,5 +1,4 @@
 import github from './lib/github';
-import typeCast from './lib/mysql-typecast';
 import axios from 'axios';
 import moment from 'moment';
 import numbers from 'numbers';
@@ -37,7 +36,7 @@ export const run = async (event, context, callback) => {
         {
           properties(
             filter: {
-              published_at: { gte: "${start}", lte: "${end}" }
+              created_at: { gte: "${start}", lte: "${end}" }
               category: { eq: "${category}" }
               type: { eq: "${type}" }
               ${type === 'rent' ? 'rent_type: { in: ["monthly", "unknown"] }' : ''}
