@@ -1,6 +1,6 @@
-import connection from './lib/db';
 import github from './lib/github';
 import typeCast from './lib/mysql-typecast';
+import axios from 'axios';
 import moment from 'moment';
 import numbers from 'numbers';
 import inside from 'point-in-polygon';
@@ -11,8 +11,6 @@ const geojson = {
 };
 
 export const run = async (event, context, callback) => {
-  context.callbackWaitsForEmptyEventLoop = false;
-
   const type = process.env.PROPERTY_TYPE;
   const category = process.env.PROPERTY_CATEGORY;
   const activeRegion = process.env.REGION;
@@ -32,24 +30,37 @@ export const run = async (event, context, callback) => {
   const stats = {};
   const allPrices = [];
 
-  const data = await connection.query({
-    sql: `
-      SELECT price, lat, lng
-      FROM properties
-      WHERE published_at BETWEEN ? AND ?
-      AND category = ?
-      AND type = ?
-      AND lat IS NOT NULL
-      AND lng IS NOT NULL
-      AND location_country = "Latvia"
-      AND price > 1
-      ${ type === 'rent' ? 'AND (rent_type IS NULL OR rent_type = "monthly")' : '' }
-    `,
-
-    values: [start, end, category, type],
-    typeCast,
-  });
-  connection.end();
+  const { data: response } = await axios.post(
+    'https://api.brokalys.com',
+    {
+      query: `
+        {
+          properties(
+            filter: {
+              published_at: { gte: "${start}", lte: "${end}" }
+              category: { eq: "${category}" }
+              type: { eq: "${type}" }
+              ${type === 'rent' ? 'rent_type: { in: ["monthly", "unknown"] }' : ''}
+              price: { gte: 1 }
+            },
+            limit: null
+          ) {
+            results {
+              price
+              lat
+              lng
+            }
+          }
+        }
+      `,
+    },
+    {
+      headers: {
+        Authorization: process.env.BROKALYS_PRIVATE_KEY,
+      },
+    },
+  );
+  const data = response.data.properties.results;
 
   data.forEach((row) => {
     regions.map((region) => {

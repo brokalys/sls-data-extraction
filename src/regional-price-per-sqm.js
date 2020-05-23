@@ -45,7 +45,7 @@ export const run = async (event, context, callback) => {
       AND price > 1
       AND area > 1
       AND area_measurement = "m2"
-      ${ type === 'rent' ? 'AND (rent_type IS NULL OR rent_type = "monthly")' : '' }
+      ${ type === 'rent' ? 'AND (rent_type = "unknown" OR rent_type = "monthly")' : '' }
     `,
 
     values: [start, end, category, type],
