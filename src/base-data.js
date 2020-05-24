@@ -45,14 +45,16 @@ export const run = async (event, context, callback) => {
     },
   );
 
+  const summary = response.data ? response.data.properties.summary : { price: {} };
+
   const stats = {
-    count: response.data.properties.summary.count,
-    min: response.data.properties.summary.price.min,
-    max: response.data.properties.summary.price.max,
-    mean: response.data.properties.summary.price.mean,
-    median: response.data.properties.summary.price.median,
-    mode: response.data.properties.summary.price.mode,
-    standardDev: response.data.properties.summary.price.standardDev,
+    count: summary.count || 0,
+    min: summary.price.min || 0,
+    max: summary.price.max || 0,
+    mean: summary.price.mean || 0,
+    median: summary.price.median || 0,
+    mode: summary.price.mode || 0,
+    standardDev: summary.price.standardDev || 0,
   }
 
   await github.appendToFile(
