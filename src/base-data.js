@@ -56,7 +56,7 @@ export const run = async (event, context, callback) => {
   }
 
   await github.appendToFile(
-    `daily-${category.replace(/_/g, '-')}.csv`,
+    `daily-${type.replace(/_/g, '-')}.csv`,
     `"${start.substr(0, 10)}","${stats.count}","${stats.min}","${stats.max}","${stats.mean}","${stats.median}","${stats.mode}","${stats.standardDev}"`,
     `Daily data: ${start.substr(0, 10)}`
   );
