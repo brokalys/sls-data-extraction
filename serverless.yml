@@ -51,12 +51,6 @@ functions:
     alarms:
       - functionInvocations
 
-  # Weekly market share analysis
-  market-share:
-    handler: src/market-share.run
-    events:
-      - schedule: rate(7 days)
-
   # Median monthly SELLING price for APARTMENTS in Riga
   regional-data-apartment-sell-monthly:
     handler: src/regional-data.run
