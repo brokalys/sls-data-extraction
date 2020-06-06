@@ -5,6 +5,7 @@
   "author": "Matiss Janis Aboltins <matiss@mja.lv>",
   "license": "MIT",
   "dependencies": {
+    "@brokalys/location-json-schemas": "^1.1.2",
     "@octokit/rest": "^17.1.0",
     "axios": "^0.19.2",
     "moment": "^2.24.0",

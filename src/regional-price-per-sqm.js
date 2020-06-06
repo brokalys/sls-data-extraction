@@ -1,11 +1,13 @@
-import github from './lib/github';
+import { riga } from '@brokalys/location-json-schemas';
 import axios from 'axios';
 import moment from 'moment';
 import numbers from 'numbers';
 import inside from 'point-in-polygon';
 
+import github from './lib/github';
+
 const geojson = {
-  riga: require('../data/riga-geojson.json'),
+  riga,
   latvia: require('../data/latvia-geojson.json'),
 };
 
@@ -20,7 +22,7 @@ export const run = async (event, context, callback) => {
   const end = moment.utc().subtract(1, 'month').endOf('month').toISOString();
 
   const regions = geojson[activeRegion].features.map((feature) => ({
-    name: feature.properties.apkaime,
+    name: feature.properties.name,
     polygons: feature.geometry.coordinates,
   })).map((feature) => ({
     name: feature.name,
