@@ -9,6 +9,8 @@ provider:
   timeout: 10
   versionFunctions: false
   logRetentionInDays: 7
+  tags:
+    group: data-extraction
 
 functions:
   # Daily statistics for all properties: sell
