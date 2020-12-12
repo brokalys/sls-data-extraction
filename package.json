@@ -6,8 +6,8 @@
   "license": "MIT",
   "dependencies": {
     "@brokalys/location-json-schemas": "^1.1.2",
-    "@octokit/rest": "^17.1.0",
-    "axios": "^0.19.2",
+    "@octokit/rest": "^18.0.12",
+    "axios": "^0.21.0",
     "moment": "^2.24.0",
     "numbers": "^0.7.0",
     "point-in-polygon": "^1.0.1",
@@ -22,8 +22,8 @@
     "dotenv": "^8.2.0",
     "serverless": "^1.51.0",
     "serverless-webpack": "^5.3.1",
-    "webpack": "^4.39.3",
-    "webpack-node-externals": "^1.6.0"
+    "webpack": "^5.10.1",
+    "webpack-node-externals": "^2.5.2"
   },
   "scripts": {
     "start": "serverless invoke local",

@@ -6,21 +6,21 @@ const octokit = new Octokit({
 });
 
 const appendToFile = async (filename, data, commitMessage = null) => {
-  const { data: currentFile } = await octokit.repos.getContents({
+  const { data: currentFile } = await octokit.repos.getContent({
     owner: 'brokalys',
     repo: 'data',
     path: `data/${filename}`,
   });
 
-  let content = new Buffer(currentFile.content, 'base64').toString();
+  let content = Buffer.from(currentFile.content, 'base64').toString();
   content += data + "\n";
 
-  await octokit.repos.createOrUpdateFile({
+  await octokit.repos.createOrUpdateFileContents({
     owner: 'brokalys',
     repo: 'data',
     path: currentFile.path,
     message: commitMessage,
-    content: new Buffer(content).toString('base64'),
+    content: Buffer.from(content).toString('base64'),
     sha: currentFile.sha,
     committer: {
       name: 'Brokalys bot',
