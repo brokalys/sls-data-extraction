@@ -1,16 +1,26 @@
 service: sls-data-extraction
+useDotenv: true
 
 provider:
   name: aws
   region: eu-west-1
   runtime: nodejs12.x
   stage: ${opt:stage, 'dev'}
-  cfLogs: true
   timeout: 10
   versionFunctions: false
   logRetentionInDays: 7
+  environment:
+    GITHUB_TOKEN: ${env:GITHUB_TOKEN}
+    BROKALYS_API_GATEWAY_KEY: ${env:BROKALYS_API_GATEWAY_KEY}
   tags:
     group: data-extraction
+
+package:
+  include:
+    - src/**
+  exclude:
+    - yarn.lock
+  excludeDevDependencies: true
 
 functions:
   # Daily statistics for all properties: sell
@@ -20,8 +30,6 @@ functions:
       PROPERTY_CATEGORY: sell
     events:
       - schedule: cron(15 0 * * ? *)
-    alarms:
-      - functionInvocations
 
   # Daily statistics for all properties: buy
   base-data-buy:
@@ -30,8 +38,6 @@ functions:
       PROPERTY_CATEGORY: buy
     events:
       - schedule: cron(10 0 * * ? *)
-    alarms:
-      - functionInvocations
 
   # Daily statistics for all properties: rent
   base-data-rent:
@@ -40,8 +46,6 @@ functions:
       PROPERTY_CATEGORY: rent
     events:
       - schedule: cron(5 0 * * ? *)
-    alarms:
-      - functionInvocations
 
   # Daily statistics for all properties: want-to-rent
   base-data-want-to-rent:
@@ -50,8 +54,6 @@ functions:
       PROPERTY_CATEGORY: want_to_rent
     events:
       - schedule: cron(0 0 * * ? *)
-    alarms:
-      - functionInvocations
 
   # Median monthly SELLING price for APARTMENTS in Riga
   regional-data-apartment-sell-monthly:

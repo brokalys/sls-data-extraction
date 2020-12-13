@@ -1,15 +1,10 @@
-import { riga } from '@brokalys/location-json-schemas';
+import geojson from '@brokalys/location-json-schemas';
 import axios from 'axios';
 import moment from 'moment';
 import numbers from 'numbers';
 import inside from 'point-in-polygon';
 
 import github from './lib/github';
-
-const geojson = {
-  riga,
-  latvia: require('../data/latvia-geojson.json'),
-};
 
 export const run = async (event, context, callback) => {
   const type = process.env.PROPERTY_TYPE;

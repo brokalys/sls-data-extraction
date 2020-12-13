@@ -2,7 +2,7 @@
   "name": "sls-data-extraction",
   "version": "1.0.0",
   "repository": "git@github.com:Brokalys/sls-data-extraction.git",
-  "author": "Matiss Janis Aboltins <matiss@mja.lv>",
+  "author": "Matiss Janis Aboltins <matiss@brokalys.com>",
   "license": "MIT",
   "dependencies": {
     "@brokalys/location-json-schemas": "^1.1.2",
@@ -11,16 +11,10 @@
     "moment": "^2.24.0",
     "numbers": "^0.7.0",
     "point-in-polygon": "^1.0.1",
-    "safe-buffer": "^5.2.0",
-    "source-map-support": "^0.5.13"
+    "safe-buffer": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "babel-loader": "^8.0.6",
-    "babel-plugin-source-map-support": "^2.1.1",
-    "dotenv": "^8.2.0",
-    "serverless": "^1.51.0",
+    "serverless": "^2.15.0",
     "serverless-webpack": "^5.3.1",
     "webpack": "^5.10.1",
     "webpack-node-externals": "^2.5.2"
