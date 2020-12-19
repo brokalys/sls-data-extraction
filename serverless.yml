@@ -249,23 +249,23 @@ functions:
     events:
       - schedule: cron(48 0 1 * ? *)
 
-  # Median monthly SELLING price for LAND in Latvia
-  regional-data-land-sell-monthly-lv:
-    handler: src/regional-data.run
-    timeout: 200
-    environment:
-      REGION: latvia
-      PROPERTY_CATEGORY: land
-      PROPERTY_TYPE: sell
+  # # Median monthly SELLING price for LAND in Latvia
+  # regional-data-land-sell-monthly-lv:
+  #   handler: src/regional-data.run
+  #   timeout: 200
+  #   environment:
+  #     REGION: latvia
+  #     PROPERTY_CATEGORY: land
+  #     PROPERTY_TYPE: sell
 
-  # Median monthly RENT price for LAND in Latvia
-  regional-data-land-rent-monthly-lv:
-    handler: src/regional-data.run
-    timeout: 200
-    environment:
-      REGION: latvia
-      PROPERTY_CATEGORY: land
-      PROPERTY_TYPE: rent
+  # # Median monthly RENT price for LAND in Latvia
+  # regional-data-land-rent-monthly-lv:
+  #   handler: src/regional-data.run
+  #   timeout: 200
+  #   environment:
+  #     REGION: latvia
+  #     PROPERTY_CATEGORY: land
+  #     PROPERTY_TYPE: rent
 
 plugins:
   - serverless-webpack
