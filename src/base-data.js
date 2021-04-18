@@ -14,13 +14,9 @@ export const run = async (event, context, callback) => {
     'https://api.brokalys.com',
     {
       query: `
-        {
+        query DataExtraction_BaseData($filter: PropertyFilter) {
           properties(
-            filter: {
-              created_at: { gte: "${start}", lte: "${end}" }
-              type: { eq: "${type}" }
-              price: { gte: 1 }
-            },
+            filter: $filter,
             limit: null
           ) {
             summary {
@@ -37,6 +33,13 @@ export const run = async (event, context, callback) => {
           }
         }
       `,
+      variables: {
+        filter: {
+          created_at: { gte: start, lte: end },
+          type: { eq: type, },
+          price: { gte: 1 },
+        },
+      },
     },
     {
       headers: {

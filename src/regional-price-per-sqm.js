@@ -32,27 +32,28 @@ export const run = async (event, context, callback) => {
     'https://api.brokalys.com',
     {
       query: `
-        {
+        query DataExtraction_RegionPricePerSqm($filter: PropertyFilter) {
           properties(
-            filter: {
-              created_at: { gte: "${start}", lte: "${end}" }
-              category: { eq: "${category}" }
-              type: { eq: "${type}" }
-              ${type === 'rent' ? 'rent_type: { in: ["monthly", "unknown"] }' : ''}
-              price: { gte: 1 }
-              area: { gte: 1 }
-            },
+            filter: $filter,
             limit: null
           ) {
             results {
-              price
-              area
+              calc_price_per_sqm
               lat
               lng
             }
           }
         }
       `,
+      variables: {
+        filter: {
+          created_at: { gte: start, lte: end },
+          category: { eq: category, },
+          type: { eq: type, },
+          ...(type === 'rent' ? { rent_type: { in: ["monthly", "unknown"] } } : {}),
+          calc_price_per_sqm: { gt: 0 },
+        },
+      },
     },
     {
       headers: {
@@ -68,7 +69,7 @@ export const run = async (event, context, callback) => {
         .find((polygon) => inside([row.lng, row.lat], polygon[0]));
 
       if (isInside) {
-        region.prices.push(row.price / row.area);
+        region.prices.push(row.calc_price_per_sqm);
       }
 
       return region;
