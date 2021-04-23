@@ -5,7 +5,7 @@ import moment from 'moment';
 export const run = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
-  const type = process.env.PROPERTY_CATEGORY;
+  const type = process.env.PROPERTY_TYPE;
 
   const start = moment.utc().subtract(1, 'day').startOf('day').toISOString();
   const end = moment.utc().subtract(1, 'day').endOf('day').toISOString();

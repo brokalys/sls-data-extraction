@@ -27,7 +27,7 @@ functions:
   base-data-sell:
     handler: src/base-data.run
     environment:
-      PROPERTY_CATEGORY: sell
+      PROPERTY_TYPE: sell
     events:
       - schedule: cron(15 0 * * ? *)
 
@@ -35,7 +35,7 @@ functions:
   base-data-buy:
     handler: src/base-data.run
     environment:
-      PROPERTY_CATEGORY: buy
+      PROPERTY_TYPE: buy
     events:
       - schedule: cron(10 0 * * ? *)
 
@@ -43,7 +43,7 @@ functions:
   base-data-rent:
     handler: src/base-data.run
     environment:
-      PROPERTY_CATEGORY: rent
+      PROPERTY_TYPE: rent
     events:
       - schedule: cron(5 0 * * ? *)
 
@@ -51,7 +51,7 @@ functions:
   base-data-want-to-rent:
     handler: src/base-data.run
     environment:
-      PROPERTY_CATEGORY: want_to_rent
+      PROPERTY_TYPE: want_to_rent
     events:
       - schedule: cron(0 0 * * ? *)
 
