@@ -47,14 +47,6 @@ functions:
     events:
       - schedule: cron(5 0 * * ? *)
 
-  # Daily statistics for all properties: want-to-rent
-  base-data-want-to-rent:
-    handler: src/base-data.run
-    environment:
-      PROPERTY_TYPE: want_to_rent
-    events:
-      - schedule: cron(0 0 * * ? *)
-
   # Median monthly SELLING price for APARTMENTS in Riga
   regional-data-apartment-sell-monthly:
     handler: src/regional-data.run
