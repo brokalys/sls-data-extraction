@@ -21,9 +21,7 @@ yarn start -f base-data-sell
 
 ### Available functions
 - base-data-sell
-- base-data-buy
 - base-data-rent
-- base-data-want-to-rent
 - regional-data-apartment-sell-monthly
 - regional-price-per-sqm-apartment-sell-monthly
 - regional-data-apartment-rent-monthly

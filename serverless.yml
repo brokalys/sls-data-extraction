@@ -31,14 +31,6 @@ functions:
     events:
       - schedule: cron(15 0 * * ? *)
 
-  # Daily statistics for all properties: buy
-  base-data-buy:
-    handler: src/base-data.run
-    environment:
-      PROPERTY_TYPE: buy
-    events:
-      - schedule: cron(10 0 * * ? *)
-
   # Daily statistics for all properties: rent
   base-data-rent:
     handler: src/base-data.run
