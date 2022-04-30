@@ -35,7 +35,7 @@ export const run = async (event, context, callback) => {
       `,
       variables: {
         filter: {
-          created_at: { gte: start, lte: end },
+          published_at: { gte: start, lte: end },
           type: { eq: type, },
           price: { gte: 1 },
         },

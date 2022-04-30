@@ -45,7 +45,7 @@ export const run = async (event, context, callback) => {
       `,
       variables: {
         filter: {
-          created_at: { gte: start, lte: end },
+          published_at: { gte: start, lte: end },
           category: { eq: category, },
           type: { eq: type, },
           ...(type === 'rent' ? { rent_type: { in: ["monthly", "unknown"] } } : {}),
