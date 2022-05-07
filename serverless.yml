@@ -28,16 +28,16 @@ functions:
     handler: src/base-data.run
     environment:
       PROPERTY_TYPE: sell
-    events:
-      - schedule: cron(15 0 * * ? *)
+    # events:
+    #   - schedule: cron(15 0 * * ? *)
 
   # Daily statistics for all properties: rent
   base-data-rent:
     handler: src/base-data.run
     environment:
       PROPERTY_TYPE: rent
-    events:
-      - schedule: cron(5 0 * * ? *)
+    # events:
+    #   - schedule: cron(5 0 * * ? *)
 
   # Median monthly SELLING price for APARTMENTS in Riga
   regional-data-apartment-sell-monthly:
@@ -46,8 +46,8 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: apartment
       PROPERTY_TYPE: sell
-    events:
-      - schedule: cron(30 0 1 * ? *)
+    # events:
+    #   - schedule: cron(30 0 1 * ? *)
   regional-price-per-sqm-apartment-sell-monthly:
     name: ${self:provider.stage}-RegionalPricePerSqmApartmentSellMonthly
     handler: src/regional-price-per-sqm.run
@@ -55,8 +55,8 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: apartment
       PROPERTY_TYPE: sell
-    events:
-      - schedule: cron(31 0 1 * ? *)
+    # events:
+    #   - schedule: cron(31 0 1 * ? *)
 
   # Median monthly RENT price for APARTMENTS in Riga
   regional-data-apartment-rent-monthly:
@@ -65,8 +65,8 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: apartment
       PROPERTY_TYPE: rent
-    events:
-      - schedule: cron(35 0 1 * ? *)
+    # events:
+    #   - schedule: cron(35 0 1 * ? *)
   regional-price-per-sqm-apartment-rent-monthly:
     name: ${self:provider.stage}-RegionalPricePerSqmApartmentRentMonthly
     handler: src/regional-price-per-sqm.run
@@ -74,8 +74,8 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: apartment
       PROPERTY_TYPE: rent
-    events:
-      - schedule: cron(36 0 1 * ? *)
+    # events:
+    #   - schedule: cron(36 0 1 * ? *)
 
   # Median monthly SELLING price for HOUSES in Riga
   regional-data-house-sell-monthly:
@@ -84,8 +84,8 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: house
       PROPERTY_TYPE: sell
-    events:
-      - schedule: cron(40 0 1 * ? *)
+    # events:
+    #   - schedule: cron(40 0 1 * ? *)
   regional-price-per-sqm-house-sell-monthly:
     name: ${self:provider.stage}-RegionalPricePerSqmHouseSellMonthly
     handler: src/regional-price-per-sqm.run
@@ -93,8 +93,8 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: house
       PROPERTY_TYPE: sell
-    events:
-      - schedule: cron(41 0 1 * ? *)
+    # events:
+    #   - schedule: cron(41 0 1 * ? *)
 
   # Median monthly RENT price for HOUSES in Riga
   regional-data-house-rent-monthly:
@@ -103,8 +103,8 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: house
       PROPERTY_TYPE: rent
-    events:
-      - schedule: cron(45 0 1 * ? *)
+    # events:
+    #   - schedule: cron(45 0 1 * ? *)
   regional-price-per-sqm-house-rent-monthly:
     name: ${self:provider.stage}-RegionalPricePerSqmHouseRentMonthly
     handler: src/regional-price-per-sqm.run
@@ -112,8 +112,8 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: house
       PROPERTY_TYPE: rent
-    events:
-      - schedule: cron(46 0 1 * ? *)
+    # events:
+    #   - schedule: cron(46 0 1 * ? *)
 
   # Median monthly SELLING price for LAND in Riga
   regional-data-land-sell-monthly:
@@ -122,8 +122,8 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: land
       PROPERTY_TYPE: sell
-    events:
-      - schedule: cron(50 0 1 * ? *)
+    # events:
+    #   - schedule: cron(50 0 1 * ? *)
   regional-price-per-sqm-land-sell-monthly:
     name: ${self:provider.stage}-RegionalPricePerSqmLandSellMonthly
     handler: src/regional-price-per-sqm.run
@@ -131,8 +131,8 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: land
       PROPERTY_TYPE: sell
-    events:
-      - schedule: cron(51 0 1 * ? *)
+    # events:
+    #   - schedule: cron(51 0 1 * ? *)
 
   # Median monthly RENT price for LAND in Riga
   regional-data-land-rent-monthly:
@@ -141,8 +141,8 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: land
       PROPERTY_TYPE: rent
-    events:
-      - schedule: cron(55 0 1 * ? *)
+    # events:
+    #   - schedule: cron(55 0 1 * ? *)
   regional-price-per-sqm-land-rent-monthly:
     name: ${self:provider.stage}-RegionalPricePerSqmLandRentMonthly
     handler: src/regional-price-per-sqm.run
@@ -150,8 +150,8 @@ functions:
       REGION: riga
       PROPERTY_CATEGORY: land
       PROPERTY_TYPE: rent
-    events:
-      - schedule: cron(56 0 1 * ? *)
+    # events:
+    #   - schedule: cron(56 0 1 * ? *)
 
   # Median monthly SELLING price for APARTMENTS in Latvia
   regional-data-apartment-sell-monthly-lv:
@@ -161,8 +161,8 @@ functions:
       REGION: latvia
       PROPERTY_CATEGORY: apartment
       PROPERTY_TYPE: sell
-    events:
-      - schedule: cron(32 0 1 * ? *)
+    # events:
+    #   - schedule: cron(32 0 1 * ? *)
   regional-price-per-sqm-apartment-sell-monthly-lv:
     name: ${self:provider.stage}-RegionalPricePerSqmApartmentSellMonthlyLv
     handler: src/regional-price-per-sqm.run
@@ -170,8 +170,8 @@ functions:
       REGION: latvia
       PROPERTY_CATEGORY: apartment
       PROPERTY_TYPE: sell
-    events:
-      - schedule: cron(33 0 1 * ? *)
+    # events:
+    #   - schedule: cron(33 0 1 * ? *)
 
   # Median monthly RENT price for APARTMENTS in Latvia
   regional-data-apartment-rent-monthly-lv:
@@ -181,8 +181,8 @@ functions:
       REGION: latvia
       PROPERTY_CATEGORY: apartment
       PROPERTY_TYPE: rent
-    events:
-      - schedule: cron(37 0 1 * ? *)
+    # events:
+    #   - schedule: cron(37 0 1 * ? *)
   regional-price-per-sqm-apartment-rent-monthly-lv:
     name: ${self:provider.stage}-RegionalPricePerSqmApartmentRentMonthlyLv
     handler: src/regional-price-per-sqm.run
@@ -190,8 +190,8 @@ functions:
       REGION: latvia
       PROPERTY_CATEGORY: apartment
       PROPERTY_TYPE: rent
-    events:
-      - schedule: cron(38 0 1 * ? *)
+    # events:
+    #   - schedule: cron(38 0 1 * ? *)
 
   # Median monthly SELLING price for HOUSES in Latvia
   regional-data-house-sell-monthly-lv:
@@ -201,8 +201,8 @@ functions:
       REGION: latvia
       PROPERTY_CATEGORY: house
       PROPERTY_TYPE: sell
-    events:
-      - schedule: cron(42 0 1 * ? *)
+    # events:
+    #   - schedule: cron(42 0 1 * ? *)
   regional-price-per-sqm-house-sell-monthly-lv:
     name: ${self:provider.stage}-RegionalPricePerSqmHouseSellMonthlyLv
     handler: src/regional-price-per-sqm.run
@@ -210,8 +210,8 @@ functions:
       REGION: latvia
       PROPERTY_CATEGORY: house
       PROPERTY_TYPE: sell
-    events:
-      - schedule: cron(43 0 1 * ? *)
+    # events:
+    #   - schedule: cron(43 0 1 * ? *)
 
   # Median monthly RENT price for HOUSES in Latvia
   regional-data-house-rent-monthly-lv:
@@ -221,8 +221,8 @@ functions:
       REGION: latvia
       PROPERTY_CATEGORY: house
       PROPERTY_TYPE: rent
-    events:
-      - schedule: cron(47 0 1 * ? *)
+    # events:
+    #   - schedule: cron(47 0 1 * ? *)
   regional-price-per-sqm-house-rent-monthly-lv:
     name: ${self:provider.stage}-RegionalPricePerSqmHouseRentMonthlyLv
     handler: src/regional-price-per-sqm.run
@@ -230,8 +230,8 @@ functions:
       REGION: latvia
       PROPERTY_CATEGORY: house
       PROPERTY_TYPE: rent
-    events:
-      - schedule: cron(48 0 1 * ? *)
+    # events:
+    #   - schedule: cron(48 0 1 * ? *)
 
   # # Median monthly SELLING price for LAND in Latvia
   # regional-data-land-sell-monthly-lv:

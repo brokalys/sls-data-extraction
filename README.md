@@ -1,5 +1,7 @@
 # Serverless Data Extraction Functions
 
+## IMPORTANT: automatic data extraction to CSV files is now deprecated. Please contact me personally if you want to get the latest data
+
 [![Build Status](https://travis-ci.org/brokalys/sls-data-extraction.svg?branch=master)](https://travis-ci.org/brokalys/sls-data-extraction)
 [![codebeat badge](https://codebeat.co/badges/d08012a9-e6bb-4b70-8113-37f4a31b6f6d)](https://codebeat.co/projects/github-com-brokalys-sls-data-extraction-master)
 
